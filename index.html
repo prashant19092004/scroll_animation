@@ -17,6 +17,7 @@
     
 
     <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" integrity="sha512-7eHRwcbYkK4d9g/6tD/mhkf++eoTHwpNM9woBxtPUBWm67zeAfFC+HrdoE2GanKeocly/VxeLvIqwvCdk7qScg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" integrity="sha512-onMTRKJBKz8M1TnqqDuGBlowlH0ohFzMXYRNebz+yOcc5TQr/zAKsthzhuv0hiyUKEiQEQXEynnXCvNTOk50dg==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
     <script>
 
         const canvas = document.querySelector("canvas");
@@ -40,6 +41,7 @@
                     imagesLoaded++;
                     if(imagesLoaded === frames.maxIndex){
                         loadImage(frames.currentIndex);
+                        startAnimation();
                     }
                 }
 
@@ -70,6 +72,25 @@
                 context.drawImage(img, offsetX, offsetY, newWidth, newHeight);
                 frames.currentIndex = index;
             }
+        }
+
+        function startAnimation() {
+            var tl = gsap.timeline({
+                scrollTrigger : {
+                    trigger : ".parent",
+                    start : "top top",
+                    end : "bottom bottom",
+                    scrub : 1,
+                    markars : true
+                }
+            })
+
+            tl.to(frames, {
+                currentIndex : frames.maxIndex,
+                onUpdate : function(){
+                    loadImage(Math.floor(frames.currentIndex))
+                }
+            })
         }
 
         preloadImages();
