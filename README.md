@@ -6,7 +6,6 @@ This project implements a smooth **frame-by-frame scroll animation** using **HTM
 
 👉 [Live Demo (GitHub Pages Link)](https://prashant19092004.github.io/scroll_animation/)
 
-> _Replace the link above with your actual GitHub Pages URL after deployment._
 
 ---
 
